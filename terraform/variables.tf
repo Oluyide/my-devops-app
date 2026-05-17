@@ -45,3 +45,15 @@ variable "key_name" {
   type        = string
   default     = null
 }
+
+variable "app_git_repo" {
+  description = "HTTPS URL of the public git repo to clone and build on the EC2 instance."
+  type        = string
+  default     = "https://github.com/Oluyide/my-devops-app.git"
+}
+
+variable "app_git_branch" {
+  description = "Branch to clone for the app build."
+  type        = string
+  default     = "main"
+}

@@ -94,13 +94,21 @@ resource "aws_instance" "app" {
   vpc_security_group_ids = [aws_security_group.web.id]
   key_name               = var.key_name
 
+  user_data_replace_on_change = true
+
   user_data = <<-EOT
     #!/bin/bash
     set -euxo pipefail
     dnf update -y
-    dnf install -y docker
+    dnf install -y docker git
     systemctl enable --now docker
     usermod -aG docker ec2-user
+
+    git clone --depth 1 --branch ${var.app_git_branch} ${var.app_git_repo} /opt/app
+    cd /opt/app
+    docker build -t ${var.app_name}:latest .
+    docker run -d --name ${var.app_name} --restart=always \
+      -p ${var.app_port}:3000 ${var.app_name}:latest
   EOT
 
   tags = { Name = "${var.app_name}-ec2" }
