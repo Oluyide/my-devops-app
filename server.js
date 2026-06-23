@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     hostname: os.hostname(),
     timestamp: new Date().toISOString(),
   });
-});
+}); //respect
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });

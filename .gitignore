@@ -11,6 +11,10 @@ npm-debug.log*
 coverage
 .nyc_output
 
+# SSH / private keys — NEVER commit these
+*.pem
+*.key
+
 # Terraform
 .terraform/
 *.tfstate
