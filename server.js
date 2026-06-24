@@ -6,11 +6,11 @@ const PORT = parseInt(process.env.PORT, 10) || 3000;
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'Hello from my-devops-app',
+    message: 'Hello from my-devops-app - changes made 101',  
     hostname: os.hostname(),
     timestamp: new Date().toISOString(),
   });
-}); //respect
+});
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });
